@@ -70,14 +70,20 @@ def renew_color_levels(img: Image):
 def tests() -> None:
     img1 = Image.new("RGB", (300, 300))
     img2 = coloured_stripes(Image.new("RGB", (300, 300)))
+    img3 = Image.open("./TD_machine_3/img/lion.jpeg")
+    img4 = Image.open("./TD_machine_3/img/hell.png")
 
     # minimum_colors
     assert minimum_colors(img1) == [0, 0, 0]
     assert minimum_colors(img2) == [18, 34, 14]
+    assert minimum_colors(img3) == [0, 0, 0]
+    assert minimum_colors(img4) == [0, 88, 9]
 
     # maximum_colors
     assert maximum_colors(img1) == [0, 0, 0]
     assert maximum_colors(img2) == [240, 235, 244]
+    assert maximum_colors(img3) == [255, 244, 228]
+    assert maximum_colors(img4) == [0, 89, 13]
 
 
 if __name__ == "__main__":
