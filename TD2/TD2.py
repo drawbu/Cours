@@ -26,6 +26,10 @@ def sequence_max(t: array, n: int):
     return sous_tableau_somme
 
 
+
+def tests():
+    ...
+
 if __name__ == "__main__":
     sentence = "l’élément le plus présent est {r[0]} avec {r[1]} occurrences."
     for t in (

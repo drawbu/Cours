@@ -105,6 +105,10 @@ def jouer_tour(n: int):
     return
 
 
+
+def tests():
+    ...
+
 def main():
     n = 5
 

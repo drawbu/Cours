@@ -12,6 +12,10 @@ def fusion(t1: array, n1: int, t2: array, n2: int, t3: array) -> array:
                     break
 
 
+
+def tests():
+    ...
+
 if __name__ == "__main__":
     t1 = array("H", [2, 5, 5, 8, 9])
     t2 = array("H", [1, 3, 5])

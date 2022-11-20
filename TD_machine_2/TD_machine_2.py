@@ -111,6 +111,10 @@ class Labyrinthe:
         return "\n" + "\n".join(" ".join(map(str, e)) for e in self.labyrinthe)
 
 
+def tests():
+    ...
+
+
 if __name__ == "__main__":
     test_timeit = False
 

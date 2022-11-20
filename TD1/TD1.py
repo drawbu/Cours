@@ -57,6 +57,9 @@ def unduplicated(t, n):
     return True
 
 
+def tests():
+    ...
+
 if __name__ == "__main__":
     # # Exercice 2
     # t = array('b', list(range(10)))
