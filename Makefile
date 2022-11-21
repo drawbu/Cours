@@ -10,5 +10,11 @@ $(PY_VENV):
 run: $(PY_VENV)
 	@ $(PY_VENV)/pytest TD**/*.py
 
+clean:
+	@ rm -rf .pytest_cache
+	@ rm -rf */.pytest_cache
+	@ rm -rf */__pycache__
+	@ rm -f .DS_Store
+
 
 .PHONY: all run
