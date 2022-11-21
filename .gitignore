@@ -1,5 +1,9 @@
-venv
+# Editors
 .idea
+.vscode
+
+# Python
+venv
 test.py
 __pycache__
 .pytest_cache
