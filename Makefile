@@ -8,7 +8,7 @@ $(PY_VENV):
 	@ $(PY_VENV)/pip install -r requirements.txt
 
 run: $(PY_VENV)
-	@ $(PY_VENV)/pytest TD**/*.py
+	@ $(PY_VENV)/pytest TD**/*.py TP**/*.py
 
 clean:
 	@ rm -rf .pytest_cache
