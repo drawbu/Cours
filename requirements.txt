@@ -1,4 +1,4 @@
 Pillow==9.3.0
 numpy==1.23.5
 pytest==7.2.0
-pytest-timer[colorama]==0.0.11
+# pytest-timer[colorama]==0.0.11
