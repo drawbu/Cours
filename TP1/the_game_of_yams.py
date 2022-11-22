@@ -41,16 +41,16 @@ def histogram(t: array, n: int, m: int = None) -> array:
 
 def max_subarray_sum(t: array, n: int) -> int:
     histo = histogram(t, n)
-    i_maximum = 1
-    for i in range(1, n + 2):
-        if histo[i_maximum] <= histo[i]:
+    i_maximum = 6
+    for i in range(6, 0, -1):
+        if histo[i] > histo[i_maximum]:
             i_maximum = i
     return i_maximum * histo[i_maximum]
 
 
 def move_dice(t: array, n: int, value: int) -> array:
     margin = 0
-    for i in range(n-1, -1, -1):
+    for i in range(n - 1, -1, -1):
         if value == t[i]:
             margin += 1
             continue
@@ -105,26 +105,84 @@ def jouer_tour(n: int):
     return
 
 
-
 def tests():
-    ...
+    # roll_dices
+    for i in range(1, 21):
+        dices = roll_dices(i)
+        assert len(dices) == i
+        for dice in dices:
+            assert dice in range(1, 7)
 
-def main():
-    n = 5
+    # sum_values
+    for i in range(1, 21):
+        dices = roll_dices(i)
+        assert sum_values(dices, len(dices)) == sum(dices)
 
-    dices = roll_dices(n)
-    print(f"1: dices: {dices}")
-    print(f"2: total: {sum_values(dices, n)}")
-    print(f"3: number of '{dices[0]}': {number_of_dice_with_same_value(dices, n, dices[0])}")
-    print(f"4: histogram: {histogram(dices, n)}")
-    print(f"5: histogram with 5 launch: {histogram(dices, n, 5)}")
-    print(f"6: max sum same dices: {max_subarray_sum(dices, n)}")
-    print(f"7: move '6' dices: {move_dice(dices, n, 6)}")
-    print(f"8: re roll index 4 and 5: {roll_dice_again(dices, n, array('H', [3, 4]), 2)}")
-    print(f"9: search sequence: {search_sequence(dices, n)}")
-    print("10: Round of play:")
-    jouer_tour(n)
+    # number_of_dice_with_same_value
+    for i in range(1, 21):
+        dices = roll_dices(i)
+        value = random.randint(1, 7)
+        assert (
+                number_of_dice_with_same_value(dices, len(dices), value)
+                ==
+                dices.count(value)
+        )
+
+    # histogram
+    for i in range(1, 21):
+        dices = roll_dices(i)
+        histo = histogram(dices, len(dices))
+        assert histo == array(
+            "H", [len(dices)] + [dices.count(j) for j in range(1, 7)]
+        )
+        assert sum(histo) == i * 2
+
+    # histogram v2
+    for i in range(1, 21):
+        dices = roll_dices(i)
+        assert sum(histogram(dices, len(dices), i)) == i ** 2 + i
+
+    # max_subarray_sum
+    for i in range(1, 21):
+        dices = roll_dices(i)
+        histo = histogram(dices, len(dices))[1:]
+        maxi = 6 - list(reversed(histo)).index(max(histo))
+        assert max_subarray_sum(dices, len(dices)) == maxi * histo[maxi - 1]
+
+    # move_dice
+    for i in range(1, 21):
+        dices = roll_dices(i)
+        value = random.randint(1, 7)
+        number = number_of_dice_with_same_value(dices, len(dices), value)
+        result = move_dice(dices, len(dices), value)
+        assert result[:number] == array("H", [value] * number)
+        assert all(dice != value for dice in result[number:])
+
+    # roll_dice_again
+    for i in range(1, 21):
+        dices = roll_dices(i)
+        changes = array("H", [random.randint(0, i - 1) for _ in range(i)])
+        for j, d in enumerate(
+                roll_dice_again(dices, len(dices), changes, len(changes))
+        ):
+            if j not in changes:
+                assert d == dices[j]
+
+    # search_sequence
+    for test in [
+        {"dices": array("H", [6, 4, 2, 3, 5]), "should_result": 1},
+        {"dices": array("H", [6, 4, 1, 3, 5]), "should_result": -1},
+        {"dices": array("H", [4, 6, 3, 2, 5]), "should_result": 1},
+        {"dices": array("H", [1, 2, 3, 4, 5]), "should_result": 0},
+        {"dices": array("H", [2, 4, 1, 3, 5]), "should_result": 0},
+    ]:
+        dices = test.get("dices")
+        should_result = test.get("should_result")
+        assert search_sequence(dices, len(dices)) == should_result
 
 
 if __name__ == "__main__":
-    main()
+    tests()
+
+    print("10: Round of play:")
+    jouer_tour(5)
