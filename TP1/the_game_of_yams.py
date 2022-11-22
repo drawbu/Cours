@@ -3,7 +3,7 @@ from array import array
 
 
 def roll_dices(n: int) -> array:
-    result = array("H", [0]*n)
+    result = array("H", [0] * n)
     for i in range(n):
         result[i] = random.randint(1, 6)
     return result
@@ -54,7 +54,7 @@ def move_dice(t: array, n: int, value: int) -> array:
         if value == t[i]:
             margin += 1
             continue
-        t[i+margin] = t[i]
+        t[i + margin] = t[i]
     for i in range(margin):
         t[i] = value
     return t
@@ -98,10 +98,10 @@ def jouer_tour(n: int):
         if histo[i_max] == histo[0]:
             print("YAMS!")
             break
-        result = array("H", [0]*(n-histo[i_max]))
-        for i in range(n-histo[i_max]):
-            result[i] = i+histo[i_max]
-        dices = roll_dice_again(dices, n, result, n-histo[i_max])
+        result = array("H", [0] * (n - histo[i_max]))
+        for i in range(n - histo[i_max]):
+            result[i] = i + histo[i_max]
+        dices = roll_dice_again(dices, n, result, n - histo[i_max])
     return
 
 
