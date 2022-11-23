@@ -96,23 +96,24 @@ def delete_first_instance(t: array, n: int, elt: any):
 
 
 def test_delete_first_instance():
-    ...
-    # for i in range(1, 21):
-    #     arr = array("b", [randint(0, 100) for _ in range(i)])
-    #     original_arr = arr
-    #     elt = randint(0, 100)
-    #     if elt not in arr:
-    #         delete_first_instance(arr, len(arr), elt)
-    #         assert arr == original_arr
-    #         continue
-    #     index = arr.index(elt)
-    #     elt_next = index + 1
-    #     delete_first_instance(arr, len(arr), elt)
-    #
-    #     if elt != elt_next:
-    #         assert arr[index] != elt_next
-    #
-    #     assert arr[-1] == arr[-2]
+    for i in range(1, 21):
+        arr = array("b", [randint(0, 10) for _ in range(i)])
+        original_arr = array("b", arr)
+        elt = randint(0, 10)
+        if elt not in arr:
+            delete_first_instance(arr, len(arr), elt)
+            assert arr == original_arr
+            continue
+
+        index = arr.index(elt)
+        if index + 1 == len(arr):
+            continue
+
+        elt_next = arr[index + 1]
+        delete_first_instance(arr, len(arr), elt)
+
+        if elt != elt_next:
+            assert arr[index] != elt
 
 
 # Un_duplicated
