@@ -70,8 +70,8 @@ def renew_color_levels(img: Image):
 def tests() -> None:
     img1 = Image.new("RGB", (300, 300))
     img2 = coloured_stripes(Image.new("RGB", (300, 300)))
-    img3 = Image.open("./TP3/img/lion.jpeg")
-    img4 = Image.open("./TP3/img/hell.png")
+    img3 = Image.open("./assets/img/lion.jpeg")
+    img4 = Image.open("./assets/img/hell.png")
 
     # minimum_colors
     assert minimum_colors(img1) == [0, 0, 0]
